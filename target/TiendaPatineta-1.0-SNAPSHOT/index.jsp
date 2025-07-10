@@ -107,7 +107,7 @@
                                         <li><hr class="dropdown-divider"></li>
                                     </c:if>
                                     <li>
-                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/carrito">
+                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/carrito/ver">
                                             <i class="fas fa-shopping-cart me-2"></i>Mi Carrito
                                         </a>
                                     </li>
@@ -256,10 +256,13 @@
                                     
                                     <c:choose>
                                         <c:when test="${producto.stock > 0}">
-                                            <button class="btn btn-primary btn-add-cart w-100" 
-                                                    onclick="agregarAlCarrito(${producto.id})">
-                                                <i class="fas fa-cart-plus me-2"></i>Agregar al Carrito
-                                            </button>
+                                            <form action="${pageContext.request.contextPath}/carrito/agregar" method="post" class="d-grid">
+                                                <input type="hidden" name="productoId" value="${producto.id}" />
+                                                <input type="hidden" name="cantidad" value="1" />
+                                                <button type="submit" class="btn btn-primary btn-add-cart w-100">
+                                                    <i class="fas fa-cart-plus me-2"></i>Agregar al Carrito
+                                                </button>
+                                            </form>
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-secondary w-100" disabled>
@@ -316,10 +319,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function agregarAlCarrito(productoId) {
-            // Aquí se implementaría la lógica para agregar al carrito
-            alert('Producto agregado al carrito');
-        }
+        // Función de agregar al carrito eliminada, ahora se usa formulario real
     </script>
 </body>
 </html> 
