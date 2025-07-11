@@ -5,27 +5,33 @@ import com.tiendapatineta.util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UsuarioDAO {
     
     public Usuario autenticar(String email, String password) {
-        String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
         
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, email);
-            stmt.setString(2, password);
             
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Usuario(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("rol")
-                    );
+                    String hash = rs.getString("password");
+                    if (BCrypt.checkpw(password, hash)) {
+                        return new Usuario(
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("rol"),
+                            rs.getString("telefono"),
+                            rs.getString("distrito"),
+                            rs.getString("direccion")
+                        );
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -35,15 +41,18 @@ public class UsuarioDAO {
     }
     
     public boolean registrar(Usuario usuario) {
-        String sql = "INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nombre, email, telefono, distrito, direccion, password, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, usuario.getNombre());
             stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getPassword());
-            stmt.setString(4, usuario.getRol());
+            stmt.setString(3, usuario.getTelefono());
+            stmt.setString(4, usuario.getDistrito());
+            stmt.setString(5, usuario.getDireccion());
+            stmt.setString(6, usuario.getPassword());
+            stmt.setString(7, usuario.getRol());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -66,7 +75,10 @@ public class UsuarioDAO {
                     rs.getString("nombre"),
                     rs.getString("email"),
                     rs.getString("password"),
-                    rs.getString("rol")
+                    rs.getString("rol"),
+                    rs.getString("telefono"),
+                    rs.getString("distrito"),
+                    rs.getString("direccion")
                 ));
             }
         } catch (SQLException e) {
@@ -90,7 +102,10 @@ public class UsuarioDAO {
                         rs.getString("nombre"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        rs.getString("rol")
+                        rs.getString("rol"),
+                        rs.getString("telefono"),
+                        rs.getString("distrito"),
+                        rs.getString("direccion")
                     );
                 }
             }
@@ -101,16 +116,19 @@ public class UsuarioDAO {
     }
     
     public boolean actualizar(Usuario usuario) {
-        String sql = "UPDATE usuarios SET nombre = ?, email = ?, password = ?, rol = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET nombre = ?, email = ?, telefono = ?, distrito = ?, direccion = ?, password = ?, rol = ? WHERE id = ?";
         
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, usuario.getNombre());
             stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getPassword());
-            stmt.setString(4, usuario.getRol());
-            stmt.setInt(5, usuario.getId());
+            stmt.setString(3, usuario.getTelefono());
+            stmt.setString(4, usuario.getDistrito());
+            stmt.setString(5, usuario.getDireccion());
+            stmt.setString(6, usuario.getPassword());
+            stmt.setString(7, usuario.getRol());
+            stmt.setInt(8, usuario.getId());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

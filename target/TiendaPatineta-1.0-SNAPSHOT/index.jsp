@@ -112,7 +112,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/mis-compras">
+                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/historial">
                                             <i class="fas fa-history me-2"></i>Mis Compras
                                         </a>
                                     </li>

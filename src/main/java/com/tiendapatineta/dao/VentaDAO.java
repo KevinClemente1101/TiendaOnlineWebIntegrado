@@ -107,7 +107,8 @@ public class VentaDAO {
 
     public List<Venta> obtenerPorUsuario(int usuarioId) {
         List<Venta> ventas = new ArrayList<>();
-        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, v.direccion_envio, v.metodo_pago, v.referencia_pago FROM ventas v WHERE v.usuario_id = ? ORDER BY v.fecha DESC";
+        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, v.direccion_envio, v.metodo_pago, v.referencia_pago, u.nombre as usuario_nombre, u.email as usuario_email " +
+                     "FROM ventas v JOIN usuarios u ON v.usuario_id = u.id WHERE v.usuario_id = ? ORDER BY v.fecha DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, usuarioId);
@@ -121,6 +122,11 @@ public class VentaDAO {
                     venta.setDireccionEnvio(rs.getString("direccion_envio"));
                     venta.setMetodoPago(rs.getString("metodo_pago"));
                     venta.setReferenciaPago(rs.getString("referencia_pago"));
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("usuario_id"));
+                    usuario.setNombre(rs.getString("usuario_nombre"));
+                    usuario.setEmail(rs.getString("usuario_email"));
+                    venta.setUsuario(usuario);
                     ventas.add(venta);
                 }
             }
