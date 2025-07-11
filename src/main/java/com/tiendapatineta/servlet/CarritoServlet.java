@@ -41,12 +41,14 @@ public class CarritoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
+        System.out.println("[CarritoServlet] pathInfo: " + pathInfo); // Depuración
         if (pathInfo != null && pathInfo.equals("/agregar")) {
             agregarAlCarrito(request, response);
         } else if (pathInfo != null && pathInfo.equals("/actualizar")) {
             actualizarCantidad(request, response);
         } else {
-            response.sendRedirect(request.getContextPath() + "/carrito/ver");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Ruta no soportada: " + pathInfo);
         }
     }
 
@@ -62,27 +64,47 @@ public class CarritoServlet extends HttpServlet {
     }
 
     private void agregarAlCarrito(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productoId = Integer.parseInt(request.getParameter("productoId"));
-        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        HttpSession session = request.getSession();
-        List<ItemCarrito> carrito = (List<ItemCarrito>) session.getAttribute("carrito");
-        if (carrito == null) {
-            carrito = new ArrayList<>();
+        // Log de todos los parámetros recibidos
+        request.getParameterMap().forEach((k, v) -> System.out.println("[CarritoServlet] Param: " + k + " = " + java.util.Arrays.toString(v)));
+        String productoIdStr = request.getParameter("productoId");
+        String cantidadStr = request.getParameter("cantidad");
+        if (productoIdStr == null || cantidadStr == null || productoIdStr.isEmpty() || cantidadStr.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Faltan parámetros");
+            return;
         }
-        Producto producto = productoDAO.obtenerPorId(productoId);
-        boolean encontrado = false;
-        for (ItemCarrito item : carrito) {
-            if (item.getProducto().getId() == productoId) {
-                item.setCantidad(item.getCantidad() + cantidad);
-                encontrado = true;
-                break;
+        try {
+            int productoId = Integer.parseInt(productoIdStr);
+            int cantidad = Integer.parseInt(cantidadStr);
+            HttpSession session = request.getSession();
+            List<ItemCarrito> carrito = (List<ItemCarrito>) session.getAttribute("carrito");
+            if (carrito == null) {
+                carrito = new ArrayList<>();
             }
+            Producto producto = productoDAO.obtenerPorId(productoId);
+            if (producto == null) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("Producto no encontrado");
+                return;
+            }
+            boolean encontrado = false;
+            for (ItemCarrito item : carrito) {
+                if (item.getProducto().getId() == productoId) {
+                    item.setCantidad(item.getCantidad() + cantidad);
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) {
+                carrito.add(new ItemCarrito(producto, cantidad));
+            }
+            session.setAttribute("carrito", carrito);
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("OK");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("Error al agregar al carrito: " + e.getMessage());
         }
-        if (!encontrado) {
-            carrito.add(new ItemCarrito(producto, cantidad));
-        }
-        session.setAttribute("carrito", carrito);
-        response.sendRedirect(request.getContextPath() + "/carrito/ver");
     }
 
     private void eliminarDelCarrito(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

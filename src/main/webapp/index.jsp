@@ -66,12 +66,16 @@
 </head>
 <body>
     <jsp:include page="WEB-INF/jsp/includes/header.jsp" />
+    <div class="w-100 text-center" style="background: #222;">
+        <img src="${pageContext.request.contextPath}/uploads/banner.webp"
+         alt="Banner"
+         style="width:100%; max-width:100vw; height:600px; object-fit:cover; object-position:center;">
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container text-center">
             <h1 class="display-4 fw-bold mb-4">
-                <i class="fas fa-skating me-3"></i>
                 Las Mejores Patinetas del Perú
             </h1>
             <p class="lead mb-4">
@@ -216,18 +220,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>
-                        <i class="fas fa-skating me-2"></i>Tienda de Patinetas
-                    </h5>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:70px; margin-right:16px; vertical-align:middle;"> House of skate
+        </a>
+                  
                     <p class="mb-0">Las mejores patinetas y accesorios para todos los niveles.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <h6>Contacto</h6>
                     <p class="mb-1">
-                        <i class="fas fa-phone me-2"></i>+51 999 999 999
+                        <i class="fas fa-phone me-2"></i>+51 908 503 404
                     </p>
                     <p class="mb-1">
-                        <i class="fas fa-envelope me-2"></i>info@tiendapatineta.com
+                        <i class="fas fa-envelope me-2"></i>HauseofSkate@gmail.com
                     </p>
                     <p class="mb-0">
                         <i class="fas fa-map-marker-alt me-2"></i>Lima, Perú
@@ -236,14 +241,68 @@
             </div>
             <hr class="my-3">
             <div class="text-center">
-                <small>&copy; 2024 Tienda de Patinetas. Todos los derechos reservados.</small>
+                <small>&copy; 2024 House of Skate. Todos los derechos reservados.</small>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Función de agregar al carrito eliminada, ahora se usa formulario real
+document.addEventListener('DOMContentLoaded', function() {
+    function attachCarritoListeners() {
+        document.querySelectorAll('form[action$="/carrito/agregar"]').forEach(function(form) {
+            if (form.dataset.listenerAttached) return;
+            form.dataset.listenerAttached = 'true';
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                // Mostrar en consola los datos enviados
+                for (let pair of formData.entries()) {
+                    console.log(pair[0]+ ': ' + pair[1]);
+                }
+                // Enviar como application/x-www-form-urlencoded
+                const params = new URLSearchParams();
+                params.append('productoId', formData.get('productoId'));
+                params.append('cantidad', formData.get('cantidad'));
+                fetch(form.action, {
+                    method: 'POST',
+                    body: params,
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        mostrarToast('Producto agregado al carrito');
+                    } else {
+                        response.text().then(text => {
+                            mostrarToast('No se pudo agregar al carrito: ' + text, true);
+                        });
+                    }
+                })
+                .catch(() => mostrarToast('Error de conexión', true));
+            });
+        });
+    }
+    attachCarritoListeners();
+    function mostrarToast(mensaje, error) {
+        let toast = document.getElementById('toast-carrito');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast-carrito';
+            toast.className = 'toast align-items-center text-white ' + (error ? 'bg-danger' : 'bg-success') + ' border-0 position-fixed top-0 end-0 m-4';
+            toast.style.zIndex = 9999;
+            toast.innerHTML = `<div class=\"d-flex\"><div class=\"toast-body\">${mensaje}</div><button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\"></button></div>`;
+            document.body.appendChild(toast);
+        } else {
+            toast.querySelector('.toast-body').textContent = mensaje;
+            toast.className = 'toast align-items-center text-white ' + (error ? 'bg-danger' : 'bg-success') + ' border-0 position-fixed top-0 end-0 m-4';
+        }
+        const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+        bsToast.show();
+    }
+});
     </script>
 </body>
 </html> 

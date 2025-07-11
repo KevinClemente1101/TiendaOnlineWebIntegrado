@@ -11,7 +11,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-            <i class="fas fa-skating me-2"></i>Tienda de Patinetas
+            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:70px; margin-right:16px; vertical-align:middle;"> House of skate
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCliente">
             <span class="navbar-toggler-icon"></span>
