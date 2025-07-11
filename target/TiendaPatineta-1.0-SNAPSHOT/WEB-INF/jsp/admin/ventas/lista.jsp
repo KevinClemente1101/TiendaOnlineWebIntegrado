@@ -27,44 +27,42 @@
 </head>
 <body class="bg-light">
     <jsp:include page="../includes/header.jsp" />
-    <div class="container-fluid">
-        <div class="row">
-            <jsp:include page="../includes/sidebar.jsp" />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="h2"><i class="fas fa-shopping-cart me-2"></i>Ventas</h1>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle">
-                        <thead class="table-dark">
+    <div style="display: flex; min-height: 100vh;">
+        <jsp:include page="../includes/sidebar.jsp" />
+        <div style="flex: 1; padding: 2.5rem 2rem 2rem 2rem; background: #fff;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="h2"><i class="fas fa-shopping-cart me-2"></i>Ventas</h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="venta" items="${ventas}">
                             <tr>
-                                <th>ID</th>
-                                <th>Usuario</th>
-                                <th>Email</th>
-                                <th>Fecha</th>
-                                <th>Total</th>
-                                <th>Acciones</th>
+                                <td>${venta.id}</td>
+                                <td>${venta.usuario.nombre}</td>
+                                <td>${venta.usuario.email}</td>
+                                <td><fmt:formatDate value="${venta.fecha}" pattern="yyyy-MM-dd HH:mm"/></td>
+                                <td>S/. ${venta.total}</td>
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/admin/ventas/detalle?id=${venta.id}" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i> Ver Detalle
+                                    </a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="venta" items="${ventas}">
-                                <tr>
-                                    <td>${venta.id}</td>
-                                    <td>${venta.usuario.nombre}</td>
-                                    <td>${venta.usuario.email}</td>
-                                    <td><fmt:formatDate value="${venta.fecha}" pattern="yyyy-MM-dd HH:mm"/></td>
-                                    <td>S/. ${venta.total}</td>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}/admin/ventas/detalle?id=${venta.id}" class="btn btn-sm btn-info">
-                                            <i class="fas fa-eye"></i> Ver Detalle
-                                        </a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

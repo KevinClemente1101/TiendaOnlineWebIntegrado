@@ -11,22 +11,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: #f6f7fb;
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-            color: #222;
+            background: #fff;
+            font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+            color: #f3f3f3;
         }
         .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(120deg, #0fffc1 0%, #7e30e1 100%);
+            color: #181c24;
             padding: 5rem 0 3rem 0;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
             border-radius: 0 0 40px 40px;
             margin-bottom: 2rem;
         }
         .hero-section h1 {
             font-size: 3.2rem;
-            font-weight: 800;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            font-weight: 900;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            letter-spacing: 2px;
         }
         .hero-section p {
             font-size: 1.3rem;
@@ -35,59 +36,73 @@
         }
         .btn-light.btn-lg {
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 30px;
             padding: 0.8rem 2.5rem;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.15);
-            transition: background 0.2s, color 0.2s;
+            background: #181c24;
+            color: #0fffc1;
+            border: 2px solid #0fffc1;
+            box-shadow: 0 2px 8px rgba(126,48,225,0.15);
+            transition: background 0.2s, color 0.2s, border 0.2s;
         }
         .btn-light.btn-lg:hover {
-            background: #fff;
-            color: #764ba2;
+            background: #0fffc1;
+            color: #181c24;
+            border: 2px solid #181c24;
         }
         .category-filter {
-            background: #fff;
+            background: #23272b;
             border-radius: 16px;
             padding: 1.5rem;
-            box-shadow: 0 2px 16px rgba(102,126,234,0.07);
+            box-shadow: 0 2px 16px rgba(0,255,193,0.07);
             margin-bottom: 1rem;
         }
         .category-filter h5 {
-            font-weight: 700;
-            color: #667eea;
+            font-weight: 800;
+            color: #0fffc1;
+            letter-spacing: 1px;
         }
         .category-filter .btn {
             border-radius: 20px;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 0.3rem;
+            background: #181c24;
+            color: #0fffc1;
+            border: 1.5px solid #0fffc1;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .category-filter .btn:hover {
+            background: #0fffc1;
+            color: #181c24;
+            border: 1.5px solid #7e30e1;
         }
         .product-card {
             transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
             border: none;
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 2px 16px rgba(102,126,234,0.10);
-            background: #fff;
+            box-shadow: 0 2px 16px rgba(255, 0, 255, 0.10);
+            background: #23272b;
         }
         .product-card:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(102,126,234,0.18);
+            box-shadow: 0 8px 32px rgba(255, 0, 255, 0.18);
             z-index: 2;
         }
         .product-image {
             height: 260px;
             object-fit: cover;
             border-radius: 18px 18px 0 0;
-            background: #f3f3f3;
+            background: #181c24;
         }
         .price-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(90deg, #0fffc1 0%, #ff6b6b 100%);
+            color: #181c24;
             padding: 8px 18px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 1.1rem;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+            box-shadow: 0 2px 8px rgba(255, 0, 255, 0.10);
         }
         .stock-badge {
             position: absolute;
@@ -96,43 +111,47 @@
             font-size: 0.95rem;
             padding: 6px 14px;
             border-radius: 16px;
-            font-weight: 600;
+            font-weight: 700;
+            background: #ff6b6b;
+            color: #fff;
+            border: 2px solid #0fffc1;
         }
         .btn-add-cart {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #0fffc1 0%, #7e30e1 100%);
             border: none;
             border-radius: 25px;
             padding: 12px 0;
             font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+            font-weight: 700;
+            color: #181c24;
+            box-shadow: 0 2px 8px rgba(0,255,193,0.10);
             transition: background 0.2s, transform 0.2s;
         }
         .btn-add-cart:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            background: linear-gradient(90deg, #7e30e1 0%, #0fffc1 100%);
             color: #fff;
             transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 4px 16px rgba(102,126,234,0.18);
+            box-shadow: 0 4px 16px rgba(255, 0, 255, 0.18);
         }
         .card-title {
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.2rem;
-            color: #222;
+            color: #0fffc1;
+            letter-spacing: 1px;
         }
         .card-text {
             font-size: 1rem;
-            color: #555;
+            color: #bfc6d1;
         }
         .badge.bg-secondary {
-            background: #e9ecef !important;
-            color: #667eea !important;
-            font-weight: 600;
+            background: #7e30e1 !important;
+            color: #fff !important;
+            font-weight: 700;
             font-size: 0.95rem;
             margin-bottom: 0.5rem;
         }
         .footer {
-            background: #23272b;
+            background: linear-gradient(90deg, #181c24 0%, #7e30e1 100%);
             color: #fff;
             padding: 2.5rem 0 1rem 0;
             border-radius: 40px 40px 0 0;
@@ -140,14 +159,14 @@
             box-shadow: 0 -4px 24px rgba(31, 38, 135, 0.10);
         }
         .footer h5, .footer h6 {
-            color: #fff;
-            font-weight: 700;
+            color: #0fffc1;
+            font-weight: 800;
         }
         .footer p, .footer small {
-            color: #d1d5db;
+            color: #bfc6d1;
         }
         .footer .fa {
-            color: #667eea;
+            color: #0fffc1;
         }
         @media (max-width: 768px) {
             .hero-section {

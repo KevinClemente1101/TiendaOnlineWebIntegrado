@@ -31,8 +31,6 @@
             flex-direction: column;
             justify-content: flex-start;
             transition: box-shadow 0.2s, background 0.2s;
-            position: fixed;
-            z-index: 1000;
         }
         
         .admin-sidebar .nav-link {
@@ -287,61 +285,55 @@
         }
     </style>
     <style>
-        .admin-sidebar-fixed {
-            position: fixed;
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-marker {
+            position: absolute;
+            left: -35px;
             top: 0;
-            left: 0;
-            width: 270px;
-            height: 100vh;
-            z-index: 1000;
-            background: transparent;
-            /* El nav ya tiene border-radius y sombra */
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
-        .main-content-fixed {
-            margin-left: 270px;
-            padding: 2.5rem 2rem 2rem 2rem;
-            background: #fff;
-            min-height: 100vh;
-        }
-        @media (max-width: 991px) {
-            .admin-sidebar-fixed {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-            .main-content-fixed {
-                margin-left: 0;
-                padding: 1rem;
-            }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 12px;
+            width: 2px;
+            height: 20px;
+            background: #dee2e6;
         }
     </style>
 </head>
 <body>
     <jsp:include page="includes/header.jsp" />
-    <!-- Sidebar fijo a la izquierda -->
-    <div class="admin-sidebar-fixed">
+    <div style="display: flex; min-height: 100vh;">
         <jsp:include page="includes/sidebar.jsp" />
-    </div>
-    <!-- Contenido principal con margen izquierdo -->
-    <div class="main-content-fixed">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">
-                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                    </h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-download me-1"></i>Exportar
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-print me-1"></i>Imprimir
-                            </button>
-                        </div>
+        <div style="flex: 1; padding: 2.5rem 2rem 2rem 2rem; background: #fff;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-download me-1"></i>Exportar
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-print me-1"></i>Imprimir
+                        </button>
                     </div>
                 </div>
-                
-                <!-- Estadísticas Principales -->
-                <div class="row mb-4">
+            </div>
+            <!-- Estadísticas Principales -->
+            <div class="row mb-4">
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="stat-card">
                             <div class="d-flex justify-content-between align-items-center">

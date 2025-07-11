@@ -76,12 +76,7 @@
                     <i class="fas fa-user-cog"></i> Mi Perfil
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin/backup">
-                    <i class="fas fa-database me-2"></i>
-                    Backup
-                </a>
-            </li>
+          
         </ul>
     </div>
 </nav> 

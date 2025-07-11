@@ -50,15 +50,11 @@
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/">
-                                <i class="fas fa-store me-2"></i>Ver Tienda
-                            </a>
-                        </li>
+                    
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
-                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesion
                             </a>
                         </li>
                     </ul>

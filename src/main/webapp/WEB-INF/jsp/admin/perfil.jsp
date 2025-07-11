@@ -12,67 +12,61 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/admin/includes/header.jsp" />
-<div class="container-fluid">
-  <div class="row">
-    <jsp:include page="/WEB-INF/jsp/admin/includes/sidebar.jsp" />
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4 d-flex align-items-start justify-content-center" style="min-height: 92vh;">
-      <div class="row w-100 justify-content-center align-items-start" style="margin-top:0;">
-        <div class="col-md-8">
-          <div class="perfil-card">
-            <h2 class="mb-4 perfil-title"><i class="fas fa-user-cog me-2"></i>Mi Perfil</h2>
-            <c:if test="${not empty mensaje}">
-              <div class="alert alert-success">${mensaje}</div>
-            </c:if>
-            <c:if test="${not empty error}">
-              <div class="alert alert-danger">${error}</div>
-            </c:if>
-            <form method="post" action="perfil" class="perfil-form">
-              <input type="hidden" name="accion" value="actualizarPerfil" />
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="${usuario.nombre}" required />
-              </div>
-              <div class="mb-3">
-                <label for="correo" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="correo" name="correo" value="${usuario.email}" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
-              </div>
-              <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" value="${usuario.telefono}" required pattern="^9\d{8}$" maxlength="9" />
-              </div>
-              <div class="mb-3">
-                <label for="distrito" class="form-label">Distrito</label>
-                <input type="text" class="form-control" id="distrito" name="distrito" value="${usuario.distrito}" required />
-              </div>
-              <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="direccion" name="direccion" value="${usuario.direccion}" required />
-              </div>
-              <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
-            </form>
-            <hr />
-            <h4 class="mb-3">Cambiar Contraseña</h4>
-            <form method="post" action="perfil" class="perfil-form">
-              <input type="hidden" name="accion" value="cambiarContrasena" />
-              <div class="mb-3">
-                <label for="actual" class="form-label">Contraseña Actual</label>
-                <input type="password" class="form-control" id="actual" name="actual" required />
-              </div>
-              <div class="mb-3">
-                <label for="nueva" class="form-label">Nueva Contraseña</label>
-                <input type="password" class="form-control" id="nueva" name="nueva" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=]{8,}$" />
-                <div class="form-text">Mínimo 8 caracteres, al menos una letra y un número.</div>
-              </div>
-              <div class="mb-3">
-                <label for="confirmar" class="form-label">Confirmar Nueva Contraseña</label>
-                <input type="password" class="form-control" id="confirmar" name="confirmar" required />
-              </div>
-              <button type="submit" class="btn btn-warning">Cambiar Contraseña</button>
-            </form>
-          </div>
+<div style="display: flex; min-height: 100vh;">
+  <jsp:include page="/WEB-INF/jsp/admin/includes/sidebar.jsp" />
+  <div style="flex: 1; padding: 2.5rem 2rem 2rem 2rem; background: #fff; display: flex; align-items: flex-start; justify-content: center;">
+    <div class="perfil-card">
+      <h2 class="mb-4 perfil-title"><i class="fas fa-user-cog me-2"></i>Mi Perfil</h2>
+      <c:if test="${not empty mensaje}">
+        <div class="alert alert-success">${mensaje}</div>
+      </c:if>
+      <c:if test="${not empty error}">
+        <div class="alert alert-danger">${error}</div>
+      </c:if>
+      <form method="post" action="perfil" class="perfil-form">
+        <input type="hidden" name="accion" value="actualizarPerfil" />
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" value="${usuario.nombre}" required />
         </div>
-      </div>
-    </main>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo</label>
+          <input type="email" class="form-control" id="correo" name="correo" value="${usuario.email}" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" class="form-control" id="telefono" name="telefono" value="${usuario.telefono}" required pattern="^9\d{8}$" maxlength="9" />
+        </div>
+        <div class="mb-3">
+          <label for="distrito" class="form-label">Distrito</label>
+          <input type="text" class="form-control" id="distrito" name="distrito" value="${usuario.distrito}" required />
+        </div>
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" name="direccion" value="${usuario.direccion}" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+      </form>
+      <hr />
+      <h4 class="mb-3">Cambiar Contraseña</h4>
+      <form method="post" action="perfil" class="perfil-form">
+        <input type="hidden" name="accion" value="cambiarContrasena" />
+        <div class="mb-3">
+          <label for="actual" class="form-label">Contraseña Actual</label>
+          <input type="password" class="form-control" id="actual" name="actual" required />
+        </div>
+        <div class="mb-3">
+          <label for="nueva" class="form-label">Nueva Contraseña</label>
+          <input type="password" class="form-control" id="nueva" name="nueva" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=]{8,}$" />
+          <div class="form-text">Mínimo 8 caracteres, al menos una letra y un número.</div>
+        </div>
+        <div class="mb-3">
+          <label for="confirmar" class="form-label">Confirmar Nueva Contraseña</label>
+          <input type="password" class="form-control" id="confirmar" name="confirmar" required />
+        </div>
+        <button type="submit" class="btn btn-warning">Cambiar Contraseña</button>
+      </form>
+    </div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

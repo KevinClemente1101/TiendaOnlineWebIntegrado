@@ -7,6 +7,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+.navbar {
+    background: #23272b !important;
+    box-shadow: 0 2px 12px rgba(15,255,193,0.10);
+    font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.navbar .navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #0fffc1 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.navbar .navbar-nav .nav-link {
+    color: #0fffc1 !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-right: 0.7rem;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+.navbar .navbar-nav .nav-link.active, .navbar .navbar-nav .nav-link:hover {
+    color: #23272b !important;
+    background: #0fffc1;
+}
+.navbar .dropdown-menu {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(15,255,193,0.10);
+    font-size: 1rem;
+    background: #181c24;
+    color: #0fffc1;
+}
+.navbar .dropdown-item {
+    color: #0fffc1;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+.navbar .dropdown-item:hover, .navbar .dropdown-item:focus {
+    background: #0fffc1;
+    color: #181c24;
+}
+.navbar .fa, .navbar .fas, .navbar .far, .navbar .fab {
+    color: #0fffc1 !important;
+}
+</style>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
