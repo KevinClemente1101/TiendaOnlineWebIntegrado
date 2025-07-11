@@ -18,7 +18,30 @@
                 <div class="alert alert-info">Tu carrito está vacío.</div>
             </c:when>
             <c:otherwise>
-                <form action="${pageContext.request.contextPath}/checkout" method="post">
+                <form action="${pageContext.request.contextPath}/checkout" method="post" id="checkoutForm">
+                    <div class="mb-3">
+                        <label for="direccionEnvio" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Dirección de envío *</label>
+                        <input type="text" class="form-control" id="direccionEnvio" name="direccionEnvio" required maxlength="255" placeholder="Ej: Av. Siempre Viva 123, Lima">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-money-check-alt me-2"></i>Método de pago *</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="pagoTarjeta" value="tarjeta" required onclick="mostrarCampoPago()">
+                            <label class="form-check-label" for="pagoTarjeta">Tarjeta</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="pagoYape" value="yape" required onclick="mostrarCampoPago()">
+                            <label class="form-check-label" for="pagoYape">Yape</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" id="campoTarjeta" style="display:none;">
+                        <label for="referenciaTarjeta" class="form-label"><i class="fas fa-credit-card me-2"></i>Número de tarjeta *</label>
+                        <input type="text" class="form-control" id="referenciaTarjeta" name="referenciaPago" maxlength="30" pattern="[0-9]{12,19}" placeholder="Ej: 4111111111111111">
+                    </div>
+                    <div class="mb-3" id="campoYape" style="display:none;">
+                        <label for="referenciaYape" class="form-label"><i class="fab fa-y-combinator me-2"></i>Número de Yape *</label>
+                        <input type="text" class="form-control" id="referenciaYape" name="referenciaPago" maxlength="30" pattern="[0-9]{9,15}" placeholder="Ej: 987654321">
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered align-middle">
                             <thead class="table-dark">
@@ -43,8 +66,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th colspan="3" class="text-end">Envío:</th>
+                                    <th>S/. 10.00</th>
+                                </tr>
+                                <tr>
                                     <th colspan="3" class="text-end">Total:</th>
-                                    <th>S/. ${total}</th>
+                                    <th>S/. ${total + 10}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -59,5 +86,45 @@
         </c:choose>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarCampoPago() {
+            var tarjeta = document.getElementById('pagoTarjeta').checked;
+            var yape = document.getElementById('pagoYape').checked;
+            document.getElementById('campoTarjeta').style.display = tarjeta ? 'block' : 'none';
+            document.getElementById('campoYape').style.display = yape ? 'block' : 'none';
+            // Habilita solo el campo correspondiente
+            document.getElementById('referenciaTarjeta').disabled = !tarjeta;
+            document.getElementById('referenciaYape').disabled = !yape;
+            // Limpia el valor del campo oculto
+            if (!tarjeta) document.getElementById('referenciaTarjeta').value = '';
+            if (!yape) document.getElementById('referenciaYape').value = '';
+        }
+        // Validación simple para que se ingrese el campo correcto según método
+        document.getElementById('checkoutForm').onsubmit = function(e) {
+            var metodo = document.querySelector('input[name="metodoPago"]:checked');
+            if (!metodo) {
+                alert('Seleccione un método de pago.');
+                return false;
+            }
+            if (metodo.value === 'tarjeta') {
+                var ref = document.getElementById('referenciaTarjeta').value.trim();
+                if (ref.length < 12) {
+                    alert('Ingrese un número de tarjeta válido.');
+                    document.getElementById('referenciaTarjeta').focus();
+                    return false;
+                }
+                document.getElementById('referenciaYape').value = '';
+            } else if (metodo.value === 'yape') {
+                var ref = document.getElementById('referenciaYape').value.trim();
+                if (ref.length < 9) {
+                    alert('Ingrese un número de Yape válido.');
+                    document.getElementById('referenciaYape').focus();
+                    return false;
+                }
+                document.getElementById('referenciaTarjeta').value = '';
+            }
+            return true;
+        };
+    </script>
 </body>
 </html> 

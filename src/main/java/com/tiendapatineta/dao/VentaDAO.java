@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class VentaDAO {
     public List<Venta> obtenerTodas() {
         List<Venta> ventas = new ArrayList<>();
-        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, u.nombre as usuario_nombre, u.email as usuario_email FROM ventas v JOIN usuarios u ON v.usuario_id = u.id ORDER BY v.fecha DESC";
+        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, v.direccion_envio, v.metodo_pago, v.referencia_pago, u.nombre as usuario_nombre, u.email as usuario_email FROM ventas v JOIN usuarios u ON v.usuario_id = u.id ORDER BY v.fecha DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -22,6 +22,9 @@ public class VentaDAO {
                 venta.setUsuarioId(rs.getInt("usuario_id"));
                 venta.setFecha(rs.getTimestamp("fecha"));
                 venta.setTotal(rs.getBigDecimal("total"));
+                venta.setDireccionEnvio(rs.getString("direccion_envio"));
+                venta.setMetodoPago(rs.getString("metodo_pago"));
+                venta.setReferenciaPago(rs.getString("referencia_pago"));
                 Usuario usuario = new Usuario();
                 usuario.setId(rs.getInt("usuario_id"));
                 usuario.setNombre(rs.getString("usuario_nombre"));
@@ -65,13 +68,16 @@ public class VentaDAO {
 
     public int registrarVenta(Venta venta, List<com.tiendapatineta.model.ItemCarrito> carrito) {
         int ventaId = -1;
-        String sqlVenta = "INSERT INTO ventas (usuario_id, fecha, total) VALUES (?, NOW(), ?)";
+        String sqlVenta = "INSERT INTO ventas (usuario_id, fecha, total, direccion_envio, metodo_pago, referencia_pago) VALUES (?, NOW(), ?, ?, ?, ?)";
         String sqlDetalle = "INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, subtotal) VALUES (?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
             try (PreparedStatement stmtVenta = conn.prepareStatement(sqlVenta, Statement.RETURN_GENERATED_KEYS)) {
                 stmtVenta.setInt(1, venta.getUsuarioId());
                 stmtVenta.setBigDecimal(2, venta.getTotal());
+                stmtVenta.setString(3, venta.getDireccionEnvio());
+                stmtVenta.setString(4, venta.getMetodoPago());
+                stmtVenta.setString(5, venta.getReferenciaPago());
                 int affectedRows = stmtVenta.executeUpdate();
                 if (affectedRows == 0) throw new SQLException("No se pudo registrar la venta");
                 try (ResultSet generatedKeys = stmtVenta.getGeneratedKeys()) {
@@ -101,7 +107,7 @@ public class VentaDAO {
 
     public List<Venta> obtenerPorUsuario(int usuarioId) {
         List<Venta> ventas = new ArrayList<>();
-        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total FROM ventas v WHERE v.usuario_id = ? ORDER BY v.fecha DESC";
+        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, v.direccion_envio, v.metodo_pago, v.referencia_pago FROM ventas v WHERE v.usuario_id = ? ORDER BY v.fecha DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, usuarioId);
@@ -112,6 +118,9 @@ public class VentaDAO {
                     venta.setUsuarioId(rs.getInt("usuario_id"));
                     venta.setFecha(rs.getTimestamp("fecha"));
                     venta.setTotal(rs.getBigDecimal("total"));
+                    venta.setDireccionEnvio(rs.getString("direccion_envio"));
+                    venta.setMetodoPago(rs.getString("metodo_pago"));
+                    venta.setReferenciaPago(rs.getString("referencia_pago"));
                     ventas.add(venta);
                 }
             }

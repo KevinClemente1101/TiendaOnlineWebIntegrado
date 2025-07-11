@@ -50,16 +50,32 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/carrito/ver");
             return;
         }
-        // Calcular total
+        // Obtener y validar datos del formulario
+        String direccionEnvio = request.getParameter("direccionEnvio");
+        String metodoPago = request.getParameter("metodoPago");
+        String referenciaPago = request.getParameter("referenciaPago");
+        if (direccionEnvio == null || direccionEnvio.trim().isEmpty() ||
+            metodoPago == null || metodoPago.trim().isEmpty() ||
+            referenciaPago == null || referenciaPago.trim().isEmpty()) {
+            request.setAttribute("carrito", carrito);
+            request.setAttribute("error", "Por favor complete todos los campos de envío y pago.");
+            request.getRequestDispatcher("/WEB-INF/jsp/checkout.jsp").forward(request, response);
+            return;
+        }
+        // Calcular total + envío fijo
         BigDecimal total = BigDecimal.ZERO;
         for (ItemCarrito item : carrito) {
             total = total.add(item.getSubtotal());
         }
+        total = total.add(new BigDecimal("10.00")); // Envío fijo
         // Registrar venta
         Venta venta = new Venta();
         venta.setUsuarioId(usuario.getId());
-        venta.setFecha(new Date());
+        venta.setFecha(new java.util.Date());
         venta.setTotal(total);
+        venta.setDireccionEnvio(direccionEnvio.trim());
+        venta.setMetodoPago(metodoPago.trim());
+        venta.setReferenciaPago(referenciaPago.trim());
         int ventaId = ventaDAO.registrarVenta(venta, carrito);
         // Actualizar stock
         for (ItemCarrito item : carrito) {
@@ -67,7 +83,7 @@ public class CheckoutServlet extends HttpServlet {
         }
         // Limpiar carrito
         session.removeAttribute("carrito");
-        // Redirigir a página de éxito
-        response.sendRedirect(request.getContextPath() + "/checkout/exito?id=" + ventaId);
+        // Redirigir a página principal
+        response.sendRedirect(request.getContextPath() + "/");
     }
 } 

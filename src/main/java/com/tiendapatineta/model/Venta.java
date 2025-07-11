@@ -12,6 +12,9 @@ public class Venta implements Serializable {
     private BigDecimal total;
     private Usuario usuario;
     private List<DetalleVenta> detalles;
+    private String direccionEnvio;
+    private String metodoPago;
+    private String referenciaPago;
     
     public Venta() {}
     
@@ -69,6 +72,25 @@ public class Venta implements Serializable {
     
     public void setDetalles(List<DetalleVenta> detalles) {
         this.detalles = detalles;
+    }
+    
+    public String getDireccionEnvio() {
+        return direccionEnvio;
+    }
+    public void setDireccionEnvio(String direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
+    }
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+    public String getReferenciaPago() {
+        return referenciaPago;
+    }
+    public void setReferenciaPago(String referenciaPago) {
+        this.referenciaPago = referenciaPago;
     }
     
     @Override
