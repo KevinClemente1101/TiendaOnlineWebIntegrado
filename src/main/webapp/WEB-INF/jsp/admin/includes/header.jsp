@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/dashboard">
             <i class=""></i>House Of Skate - Admin
@@ -100,6 +100,9 @@
 .admin-navbar .dropdown-item:hover, .admin-navbar .dropdown-item:focus {
     background: #f3f4f6;
     color: #667eea;
+}
+body {
+    padding-top: 70px !important; /* Ajusta según la altura real de la navbar */
 }
 </style>
 <script>

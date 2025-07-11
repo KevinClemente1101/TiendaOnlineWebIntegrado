@@ -7,13 +7,27 @@
     <title>Proveedores - Admin | Tienda de Patinetas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+        }
+        main.col-md-9 {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        .container-fluid, .row {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <jsp:include page="../includes/header.jsp" />
-    <div class="container-fluid">
-      <div class="row">
+    <div style="display: flex; min-height: 100vh;">
         <jsp:include page="../includes/sidebar.jsp" />
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <div style="flex: 1; padding: 2.5rem 2rem 2rem 2rem; background: #fff;">
           <div class="d-flex justify-content-between align-items-center mb-3">
               <h1 class="h2"><i class="fas fa-truck me-2"></i>Proveedores</h1>
               <a href="${pageContext.request.contextPath}/admin/proveedores/nuevo" class="btn btn-primary">
@@ -53,8 +67,7 @@
                   </tbody>
               </table>
           </div>
-        </main>
-      </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

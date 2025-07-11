@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+<nav id="sidebarMenu" class="admin-sidebar">
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -92,7 +92,6 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.28), 0 1.5px 0 #ffb300 inset;
     padding: 2.5rem 1.5rem 2rem 1.5rem;
     min-height: 92vh;
-    margin-top: 1.5rem;
     margin-left: 1.5rem;
     width: 270px;
     display: flex;
@@ -157,7 +156,6 @@
         min-height: auto;
         width: 100%;
         margin-left: 0;
-        margin-top: 0.5rem;
         border-radius: 18px;
     }
     .admin-sidebar .nav-link { font-size: 1rem; padding: 0.6rem 0.7rem; }

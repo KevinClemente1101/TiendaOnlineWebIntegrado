@@ -9,6 +9,21 @@
     <title>Ventas - Admin | Tienda de Patinetas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+        }
+        main.col-md-9 {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        .container-fluid, .row {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <jsp:include page="../includes/header.jsp" />
