@@ -10,57 +10,157 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        body {
+            background: #f6f7fb;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            color: #222;
+        }
         .hero-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0 3rem 0;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 2rem;
+        }
+        .hero-section h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.15);
+        }
+        .hero-section p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+        .btn-light.btn-lg {
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 0.8rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.15);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-light.btn-lg:hover {
+            background: #fff;
+            color: #764ba2;
+        }
+        .category-filter {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.07);
+            margin-bottom: 1rem;
+        }
+        .category-filter h5 {
+            font-weight: 700;
+            color: #667eea;
+        }
+        .category-filter .btn {
+            border-radius: 20px;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
         }
         .product-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
             border: none;
-            border-radius: 15px;
+            border-radius: 18px;
             overflow: hidden;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.10);
+            background: #fff;
         }
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(102,126,234,0.18);
+            z-index: 2;
         }
         .product-image {
-            height: 250px;
+            height: 260px;
             object-fit: cover;
+            border-radius: 18px 18px 0 0;
+            background: #f3f3f3;
         }
         .price-tag {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
         }
         .stock-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .category-filter {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
+            top: 12px;
+            right: 12px;
+            font-size: 0.95rem;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-weight: 600;
         }
         .btn-add-cart {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             border-radius: 25px;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+            transition: background 0.2s, transform 0.2s;
         }
         .btn-add-cart:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: #fff;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 4px 16px rgba(102,126,234,0.18);
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #222;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+        .badge.bg-secondary {
+            background: #e9ecef !important;
+            color: #667eea !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer {
+            background: #23272b;
+            color: #fff;
+            padding: 2.5rem 0 1rem 0;
+            border-radius: 40px 40px 0 0;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 24px rgba(31, 38, 135, 0.10);
+        }
+        .footer h5, .footer h6 {
+            color: #fff;
+            font-weight: 700;
+        }
+        .footer p, .footer small {
+            color: #d1d5db;
+        }
+        .footer .fa {
+            color: #667eea;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2.5rem 0 1.5rem 0;
+                border-radius: 0 0 24px 24px;
+            }
+            .product-image {
+                height: 180px;
+            }
+            .footer {
+                border-radius: 24px 24px 0 0;
+                padding: 1.5rem 0 0.5rem 0;
+            }
         }
     </style>
 </head>
@@ -70,7 +170,7 @@
         <img src="${pageContext.request.contextPath}/uploads/banner.webp"
          alt="Banner"
          style="width:100%; max-width:100vw; height:600px; object-fit:cover; object-position:center;">
-    </div>
+        </div>
 
     <!-- Hero Section -->
     <section class="hero-section">

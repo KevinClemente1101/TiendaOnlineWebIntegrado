@@ -11,7 +11,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:70px; margin-right:16px; vertical-align:middle;"> House of skate
+            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:50px; margin-right:16px; vertical-align:middle;"> House of skate
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCliente">
             <span class="navbar-toggler-icon"></span>
@@ -33,12 +33,12 @@
                     <c:when test="${not empty sessionScope.usuario}">
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/carrito/ver">
-                                <i class="fas fa-shopping-cart me-2"></i>
+                                <i class="fas fa-shopping-cart me-2 fs-5"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/perfil">
-                                <i class="fas fa-user me-2"></i>
+                                <i class="fas fa-user me-2 fs-5"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown">
@@ -55,14 +55,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-danger" href="${pageContext.request.contextPath}/logout">
-                                <i class="fas fa-sign-out-alt me-2"></i>
+                                <i class="fas fa-sign-out-alt me-2 fs-5"></i>
                             </a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/login">
-                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesion
                             </a>
                         </li>
                         <li class="nav-item">

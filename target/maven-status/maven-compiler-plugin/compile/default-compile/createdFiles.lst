@@ -11,6 +11,7 @@ com\tiendapatineta\servlet\HistorialComprasServlet.class
 com\tiendapatineta\servlet\CarritoServlet.class
 com\tiendapatineta\servlet\CheckoutServlet.class
 com\tiendapatineta\model\Producto.class
+com\tiendapatineta\servlet\PerfilAdminServlet.class
 com\tiendapatineta\servlet\ProveedorServlet.class
 com\tiendapatineta\servlet\VerificarCodigoServlet.class
 com\tiendapatineta\dao\VentaDAO.class
