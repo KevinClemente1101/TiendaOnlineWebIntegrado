@@ -250,4 +250,29 @@ public class ProductoDAO {
             System.err.println("Error al descontar stock: " + e.getMessage());
         }
     }
+
+    public List<Producto> obtenerStockBajo(int umbral) {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT * FROM productos WHERE stock > 0 AND stock <= ? ORDER BY stock ASC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, umbral);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Producto producto = new Producto();
+                    producto.setId(rs.getInt("id"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecio(rs.getBigDecimal("precio"));
+                    producto.setStock(rs.getInt("stock"));
+                    producto.setImagen(rs.getString("imagen"));
+                    producto.setCategoriaId(rs.getInt("categoria_id"));
+                    productos.add(producto);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener productos con stock bajo: " + e.getMessage());
+        }
+        return productos;
+    }
 } 

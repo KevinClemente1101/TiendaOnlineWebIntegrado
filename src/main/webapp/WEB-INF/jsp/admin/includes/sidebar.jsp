@@ -19,7 +19,7 @@
                 <a class="nav-link ${pageContext.request.requestURI.contains('categorias') ? 'active' : ''}" 
                    href="${pageContext.request.contextPath}/admin/categorias">
                     <i class="fas fa-list me-2"></i>
-                    Categorías
+                    Categori�as
                 </a>
             </li>
             <li class="nav-item">
@@ -36,6 +36,11 @@
                     Usuarios
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/proveedores">
+                    <i class="fas fa-truck me-2"></i>Proveedores
+                </a>
+            </li>
         </ul>
         
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -45,13 +50,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/reportes/ventas">
                     <i class="fas fa-chart-line me-2"></i>
-                    Ventas por Período
+                    Ventas por Peri�odo
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/reportes/productos">
                     <i class="fas fa-chart-bar me-2"></i>
-                    Productos Más Vendidos
+                    Productos Mas Vendidos
                 </a>
             </li>
             <li class="nav-item">
@@ -63,13 +68,12 @@
         </ul>
         
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Configuración</span>
+            <span>Configuracion</span>
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin/configuracion">
-                    <i class="fas fa-cog me-2"></i>
-                    Configuración General
+                <a class="nav-link" href="${pageContext.request.contextPath}/perfil">
+                    <i class="fas fa-user-cog"></i> Mi Perfil
                 </a>
             </li>
             <li class="nav-item">

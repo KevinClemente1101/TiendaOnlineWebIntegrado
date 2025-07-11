@@ -135,4 +135,53 @@ public class VentaDAO {
         }
         return ventas;
     }
+
+    public List<Venta> obtenerPorPeriodo(java.util.Date inicio, java.util.Date fin) {
+        List<Venta> ventas = new ArrayList<>();
+        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, u.nombre as usuario_nombre, u.email as usuario_email FROM ventas v JOIN usuarios u ON v.usuario_id = u.id WHERE v.fecha BETWEEN ? AND ? ORDER BY v.fecha DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setTimestamp(1, new java.sql.Timestamp(inicio.getTime()));
+            stmt.setTimestamp(2, new java.sql.Timestamp(fin.getTime()));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Venta venta = new Venta();
+                    venta.setId(rs.getInt("id"));
+                    venta.setUsuarioId(rs.getInt("usuario_id"));
+                    venta.setFecha(rs.getTimestamp("fecha"));
+                    venta.setTotal(rs.getBigDecimal("total"));
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("usuario_id"));
+                    usuario.setNombre(rs.getString("usuario_nombre"));
+                    usuario.setEmail(rs.getString("usuario_email"));
+                    venta.setUsuario(usuario);
+                    ventas.add(venta);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener ventas por periodo: " + e.getMessage());
+        }
+        return ventas;
+    }
+
+    public List<Object[]> obtenerProductosMasVendidos(int limite) {
+        List<Object[]> resultados = new ArrayList<>();
+        String sql = "SELECT p.nombre, SUM(d.cantidad) as total_vendidos, SUM(d.subtotal) as total_monto FROM detalle_ventas d JOIN productos p ON d.producto_id = p.id GROUP BY p.id, p.nombre ORDER BY total_vendidos DESC LIMIT ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, limite);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    resultados.add(new Object[]{
+                        rs.getString("nombre"),
+                        rs.getInt("total_vendidos"),
+                        rs.getBigDecimal("total_monto")
+                    });
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener productos más vendidos: " + e.getMessage());
+        }
+        return resultados;
+    }
 } 

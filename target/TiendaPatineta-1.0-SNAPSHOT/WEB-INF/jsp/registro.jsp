@@ -11,6 +11,7 @@
     </style>
 </head>
 <body>
+    
     <div class="register-card">
         <h2 class="mb-4 text-center">Crear cuenta</h2>
         <c:if test="${not empty error}">

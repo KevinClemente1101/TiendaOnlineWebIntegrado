@@ -35,6 +35,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/perfil">
+                                        <i class="fas fa-user me-2"></i>Mi Perfil
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
                                     <a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
                                         <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
                                     </a>

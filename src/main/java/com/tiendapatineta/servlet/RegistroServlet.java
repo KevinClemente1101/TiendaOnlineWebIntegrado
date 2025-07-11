@@ -3,6 +3,9 @@ package com.tiendapatineta.servlet;
 import com.tiendapatineta.dao.UsuarioDAO;
 import com.tiendapatineta.model.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
+import com.tiendapatineta.util.EmailUtil;
+import java.util.Random;
+import jakarta.mail.MessagingException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -55,21 +58,23 @@ public class RegistroServlet extends HttpServlet {
             return;
         }
 
-        // Encriptar contraseña
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+        // Generar código de verificación
+        String codigo = String.format("%06d", new Random().nextInt(999999));
+        try {
+            EmailUtil.enviarCodigoVerificacion(email.trim(), codigo);
+        } catch (MessagingException e) {
+            request.setAttribute("error", "No se pudo enviar el correo de verificación. Intenta nuevamente.");
+            request.getRequestDispatcher("/WEB-INF/jsp/registro.jsp").forward(request, response);
+            return;
+        }
 
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre.trim());
-        usuario.setEmail(email.trim());
-        usuario.setTelefono(telefono.trim());
-        usuario.setDistrito(distrito.trim());
-        usuario.setDireccion(direccion.trim());
-        usuario.setPassword(hash);
-        usuario.setRol("cliente");
+        // Guardar datos en sesión temporalmente
+        request.getSession().setAttribute("registroUsuario", new String[]{
+            nombre.trim(), email.trim(), telefono.trim(), distrito.trim(), direccion.trim(), password, confirmar
+        });
+        request.getSession().setAttribute("codigoVerificacion", codigo);
 
-        usuarioDAO.registrar(usuario);
-
-        // Redirigir al login con mensaje de éxito
-        response.sendRedirect(request.getContextPath() + "/login?registro=ok");
+        // Redirigir a la página de verificación
+        response.sendRedirect(request.getContextPath() + "/verificar-codigo");
     }
 } 

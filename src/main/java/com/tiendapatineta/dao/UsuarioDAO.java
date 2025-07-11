@@ -150,4 +150,34 @@ public class UsuarioDAO {
             return false;
         }
     }
+
+    public boolean actualizarPerfil(Usuario usuario) {
+        String sql = "UPDATE usuarios SET nombre = ?, email = ?, telefono = ?, distrito = ?, direccion = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getTelefono());
+            stmt.setString(4, usuario.getDistrito());
+            stmt.setString(5, usuario.getDireccion());
+            stmt.setInt(6, usuario.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar perfil: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean cambiarContrasena(int id, String hash) {
+        String sql = "UPDATE usuarios SET password = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, hash);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al cambiar contraseña: " + e.getMessage());
+            return false;
+        }
+    }
 } 
