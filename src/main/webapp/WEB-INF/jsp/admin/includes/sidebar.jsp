@@ -19,7 +19,7 @@
                 <a class="nav-link ${pageContext.request.requestURI.contains('categorias') ? 'active' : ''}" 
                    href="${pageContext.request.contextPath}/admin/categorias">
                     <i class="fas fa-list me-2"></i>
-                    Categori�as
+                    Categorias
                 </a>
             </li>
             <li class="nav-item">
@@ -50,7 +50,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/reportes/ventas">
                     <i class="fas fa-chart-line me-2"></i>
-                    Ventas por Peri�odo
+                    Ventas por Periodo
                 </a>
             </li>
             <li class="nav-item">

@@ -1,4 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tienda de Patinetas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">
@@ -15,37 +24,39 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/#productos">Productos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contactanos</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/carrito/ver">
-                                <i class="fas fa-shopping-cart me-2"></i>Mi Carrito
+                                <i class="fas fa-shopping-cart me-2"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/historial">
-                                <i class="fas fa-history me-2"></i>Mis Compras
+                            <a class="nav-link" href="${pageContext.request.contextPath}/perfil">
+                                <i class="fas fa-user me-2"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCliente" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle me-1"></i>${sessionScope.usuarioNombre}
+                                ${sessionScope.usuarioNombre}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/perfil">
-                                        <i class="fas fa-user me-2"></i>Mi Perfil
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/historial">
+                                        <i class="fas fa-history me-2"></i>Mis Compras
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="${pageContext.request.contextPath}/logout">
+                                <i class="fas fa-sign-out-alt me-2"></i>
+                            </a>
                         </li>
                     </c:when>
                     <c:otherwise>

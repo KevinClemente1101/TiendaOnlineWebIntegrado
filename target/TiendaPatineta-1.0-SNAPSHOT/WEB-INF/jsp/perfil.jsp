@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="correo" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="correo" name="correo" value="${usuario.correo}" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+                    <input type="email" class="form-control" id="correo" name="correo" value="${usuario.email}" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Teléfono</label>
@@ -58,4 +58,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="${sessionScope.rol eq 'admin' ? '/WEB-INF/jsp/admin/includes/sidebar.jsp' : ''}" /> 
+<c:if test="${sessionScope.usuarioRol eq 'admin'}">
+    <jsp:include page="/WEB-INF/jsp/admin/includes/sidebar.jsp" />
+</c:if> 
