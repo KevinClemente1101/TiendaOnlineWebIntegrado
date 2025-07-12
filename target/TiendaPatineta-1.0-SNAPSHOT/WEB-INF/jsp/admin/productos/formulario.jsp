@@ -11,10 +11,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .form-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 2rem;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .preview-image {
             max-width: 200px;
@@ -22,135 +23,171 @@
             border-radius: 10px;
             object-fit: cover;
         }
+        .form-label {
+            font-weight: 700;
+            font-size: 1.08rem;
+            color: #333;
+            margin-bottom: 0.4rem;
+        }
         .form-control, .form-select {
-            border-radius: 10px;
+            border-radius: 12px;
             border: 2px solid #e9ecef;
+            background: #fff;
+            color: #333;
             padding: 12px 15px;
+            font-size: 1.05rem;
+            transition: border 0.2s, box-shadow 0.2s;
         }
         .form-control:focus, .form-select:focus {
             border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.12);
+            background: #fff;
+            color: #333;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 12px 0;
+            width: auto;
+            min-width: 180px;
+            color: #fff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102,126,234,0.18);
+        }
+        .btn-secondary {
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 12px 0;
+            min-width: 140px;
+            color: #333;
+            background: #f3f3f3;
+            border: 1.5px solid #e9ecef;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #222;
+        }
+        @media (max-width: 700px) {
+            .form-container { padding: 1.2rem 0.5rem; }
+            .form-label, .form-control, .form-select { font-size: 0.98rem; }
         }
     </style>
 </head>
 <body class="bg-light">
     <jsp:include page="../includes/header.jsp" />
-    
-    <div class="container-fluid">
-        <div class="row">
-            <jsp:include page="../includes/sidebar.jsp" />
-            
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">
-                        <i class="fas fa-${producto != null ? 'edit' : 'plus'} me-2"></i>
-                        ${producto != null ? 'Editar' : 'Nuevo'} Producto
-                    </h1>
-                    <a href="${pageContext.request.contextPath}/admin/productos" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-2"></i>Volver
-                    </a>
-                </div>
-                
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="form-container">
-                            <form action="${pageContext.request.contextPath}/admin/productos${producto != null ? '/actualizar/'.concat(producto.id) : ''}" 
-                                  method="post" enctype="multipart/form-data">
-                                
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="mb-3">
-                                            <label for="nombre" class="form-label">
-                                                <i class="fas fa-tag me-2"></i>Nombre del Producto *
-                                            </label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" 
-                                                   value="${producto.nombre}" required>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="descripcion" class="form-label">
-                                                <i class="fas fa-align-left me-2"></i>Descripción
-                                            </label>
-                                            <textarea class="form-control" id="descripcion" name="descripcion" 
-                                                      rows="4">${producto.descripcion}</textarea>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="precio" class="form-label">
-                                                        <i class="fas fa-dollar-sign me-2"></i>Precio (S/) *
-                                                    </label>
-                                                    <input type="number" class="form-control" id="precio" name="precio" 
-                                                           value="${producto.precio}" step="0.01" min="0" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="stock" class="form-label">
-                                                        <i class="fas fa-boxes me-2"></i>Stock *
-                                                    </label>
-                                                    <input type="number" class="form-control" id="stock" name="stock" 
-                                                           value="${producto.stock}" min="0" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="categoria_id" class="form-label">
-                                                <i class="fas fa-list me-2"></i>Categoría *
-                                            </label>
-                                            <select class="form-select" id="categoria_id" name="categoria_id" required>
-                                                <option value="">Selecciona una categoría</option>
-                                                <c:forEach items="${categorias}" var="categoria">
-                                                    <option value="${categoria.id}" 
-                                                            ${producto.categoriaId == categoria.id ? 'selected' : ''}>
-                                                        ${categoria.nombre}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
+    <div style="display: flex; min-height: 100vh;">
+        <jsp:include page="../includes/sidebar.jsp" />
+        <div style="flex: 1; padding: 2.5rem 2rem 2rem 2rem; background: #fff;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">
+                    <i class="fas fa-${producto != null ? 'edit' : 'plus'} me-2"></i>
+                    ${producto != null ? 'Editar' : 'Nuevo'} Producto
+                </h1>
+                <a href="${pageContext.request.contextPath}/admin/productos" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver
+                </a>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-container">
+                        <form action="${pageContext.request.contextPath}/admin/productos${producto != null ? '/actualizar/'.concat(producto.id) : ''}" 
+                              method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">
+                                            <i class="fas fa-tag me-2"></i>Nombre del Producto *
+                                        </label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                                               value="${producto.nombre}" required>
                                     </div>
-                                    
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="imagen" class="form-label">
-                                                <i class="fas fa-image me-2"></i>Imagen del Producto
-                                            </label>
-                                            <input type="file" class="form-control" id="imagen" name="imagen" 
-                                                   accept="image/*" onchange="previewImage(this)">
-                                            
-                                            <c:if test="${not empty producto.imagen}">
-                                                <div class="mt-3">
-                                                    <label class="form-label">Imagen Actual:</label>
-                                                    <img src="${pageContext.request.contextPath}/uploads/${producto.imagen}" 
-                                                         class="preview-image d-block" alt="Imagen actual">
-                                                </div>
-                                            </c:if>
-                                            
-                                            <div id="imagePreview" class="mt-3" style="display: none;">
-                                                <label class="form-label">Vista Previa:</label>
-                                                <img id="preview" class="preview-image d-block" alt="Vista previa">
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">
+                                            <i class="fas fa-align-left me-2"></i>Descripción
+                                        </label>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" 
+                                                  rows="4">${producto.descripcion}</textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="precio" class="form-label">
+                                                    <i class="fas fa-dollar-sign me-2"></i>Precio (S/) *
+                                                </label>
+                                                <input type="number" class="form-control" id="precio" name="precio" 
+                                                       value="${producto.precio}" step="0.01" min="0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="stock" class="form-label">
+                                                    <i class="fas fa-boxes me-2"></i>Stock *
+                                                </label>
+                                                <input type="number" class="form-control" id="stock" name="stock" 
+                                                       value="${producto.stock}" min="0" required>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="categoria_id" class="form-label">
+                                            <i class="fas fa-list me-2"></i>Categoría *
+                                        </label>
+                                        <select class="form-select" id="categoria_id" name="categoria_id" required>
+                                            <option value="">Selecciona una categoría</option>
+                                            <c:forEach items="${categorias}" var="categoria">
+                                                <option value="${categoria.id}" 
+                                                        ${producto.categoriaId == categoria.id ? 'selected' : ''}>
+                                                    ${categoria.nombre}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                 </div>
-                                
-                                <div class="d-flex gap-2 justify-content-end">
-                                    <a href="${pageContext.request.contextPath}/admin/productos" 
-                                       class="btn btn-secondary">
-                                        <i class="fas fa-times me-2"></i>Cancelar
-                                    </a>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>
-                                        ${producto != null ? 'Actualizar' : 'Guardar'} Producto
-                                    </button>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="imagen" class="form-label">
+                                            <i class="fas fa-image me-2"></i>Imagen del Producto
+                                        </label>
+                                        <input type="file" class="form-control" id="imagen" name="imagen" 
+                                               accept="image/*" onchange="previewImage(this)">
+                                        <c:if test="${not empty producto.imagen}">
+                                            <div class="mt-3">
+                                                <label class="form-label">Imagen Actual:</label>
+                                                <img src="${pageContext.request.contextPath}/uploads/${producto.imagen}" 
+                                                     class="preview-image d-block" alt="Imagen actual">
+                                            </div>
+                                        </c:if>
+                                        <div id="imagePreview" class="mt-3" style="display: none;">
+                                            <label class="form-label">Vista Previa:</label>
+                                            <img id="preview" class="preview-image d-block" alt="Vista previa">
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="d-flex gap-2 justify-content-end">
+                                <a href="${pageContext.request.contextPath}/admin/productos" 
+                                   class="btn btn-secondary">
+                                    <i class="fas fa-times me-2"></i>Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>
+                                    ${producto != null ? 'Actualizar' : 'Guardar'} Producto
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
     

@@ -95,14 +95,19 @@
             border-radius: 18px 18px 0 0;
             background: #181c24;
         }
-        .price-tag {
-            background: linear-gradient(90deg, #0fffc1 0%, #ff6b6b 100%);
-            color: #181c24;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 2px 8px rgba(255, 0, 255, 0.10);
+        .precio-card {
+            display: inline-block;
+            background: #181c24;
+            border-radius: 22px;
+            padding: 0.4em 1.2em;
+            font-size: 1.3rem;
+            font-weight: 800;
+            box-shadow: 0 2px 12px rgba(0,255,193,0.10);
+        }
+        .precio-card .precio-num {
+            color: #0fffc1;
+            font-weight: 900;
+            font-size: 1.3rem;
         }
         .stock-badge {
             position: absolute;
@@ -293,8 +298,8 @@
                                     </c:if>
                                     
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="price-tag">
-                                            S/ <fmt:formatNumber value="${producto.precio}" pattern="#,##0.00"/>
+                                        <span class="precio-card">
+                                            <span class="precio-num">S/ <fmt:formatNumber value="${producto.precio}" pattern="#,##0.00"/></span>
                                         </span>
                                         <small class="text-muted">
                                             Stock: ${producto.stock}

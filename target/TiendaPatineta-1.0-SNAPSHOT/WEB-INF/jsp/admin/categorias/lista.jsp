@@ -22,6 +22,51 @@
             margin-top: 0 !important;
             padding-top: 0 !important;
         }
+        .modern-table {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            background: #fff;
+        }
+        .modern-table thead th {
+            position: sticky;
+            top: 0;
+            background: #23272b;
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            border: none;
+        }
+        .modern-table tbody tr {
+            border-bottom: 1.5px solid #f0f0f0;
+            transition: box-shadow 0.18s, transform 0.18s, background 0.18s;
+        }
+        .modern-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        .modern-table tbody tr:hover {
+            background: #f7fafd;
+            box-shadow: 0 2px 12px rgba(0,255,193,0.07);
+            transform: scale(1.01);
+        }
+        .modern-table td, .modern-table th {
+            padding: 1.1rem 1rem;
+            font-size: 1.08rem;
+            vertical-align: middle;
+        }
+        .modern-table td {
+            font-weight: 600;
+            color: #23272b;
+        }
+        .modern-table .btn {
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        @media (max-width: 700px) {
+            .modern-table td, .modern-table th { padding: 0.6rem 0.3rem; font-size: 0.98rem; }
+        }
     </style>
 </head>
 <body>
@@ -53,7 +98,7 @@
                     </div>
                 </c:if>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+                    <table class="table modern-table align-middle">
                         <thead class="table-dark">
                             <tr>
                                 <th style="width: 10%">ID</th>

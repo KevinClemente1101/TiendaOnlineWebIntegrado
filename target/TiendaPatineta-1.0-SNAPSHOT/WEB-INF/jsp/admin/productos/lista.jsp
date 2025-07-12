@@ -45,6 +45,20 @@
             padding: 8px 16px;
             font-size: 0.9rem;
         }
+        .precio-card {
+            display: inline-block;
+            background: #181c24;
+            border-radius: 22px;
+            padding: 0.4em 1.2em;
+            font-size: 1.3rem;
+            font-weight: 800;
+            box-shadow: 0 2px 12px rgba(0,255,193,0.10);
+        }
+        .precio-card .precio-num {
+            color: #0fffc1;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
     </style>
 </head>
 <body>
@@ -118,9 +132,7 @@
                                     
                                     <div class="mt-auto">
                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <span class="h5 text-primary mb-0">
-                                                S/ <fmt:formatNumber value="${producto.precio}" pattern="#,##0.00"/>
-                                            </span>
+                                            <span class="precio-card mb-0">S/ <span class="precio-num"><fmt:formatNumber value="${producto.precio}" pattern=",##0.00"/></span></span>
                                             <small class="text-muted">
                                                 Stock: ${producto.stock}
                                             </small>

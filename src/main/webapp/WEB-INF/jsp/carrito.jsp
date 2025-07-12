@@ -10,9 +10,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
 .carrito-container {
-    background: #fff;
+    background: #181c24;
     border-radius: 22px;
-    box-shadow: 0 4px 32px rgba(102,126,234,0.13);
+    box-shadow: 0 4px 32px rgba(0,255,193,0.13);
     padding: 2.5rem 2rem 2rem 2rem;
     max-width: 1100px;
     margin: 2.5rem auto 2rem auto;
@@ -20,7 +20,7 @@
 .carrito-title {
     font-size: 2.7rem;
     font-weight: 900;
-    color: #222;
+    color: #0fffc1;
     margin-bottom: 2.2rem;
     display: flex;
     align-items: center;
@@ -30,25 +30,27 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    background: #f8f9fa;
+    background: #23272b;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 2px 16px rgba(102,126,234,0.07);
+    box-shadow: 0 2px 16px rgba(0,255,193,0.07);
+    color: #fff;
 }
 .carrito-table th {
-    background: #667eea;
-    color: #fff;
+    background: #0fffc1;
+    color: #181c24;
     font-weight: 700;
     font-size: 1.1rem;
     border: none;
     padding: 1rem 0.7rem;
 }
 .carrito-table td {
-    background: #fff;
+    background: #23272b;
     font-size: 1.05rem;
     border: none;
     padding: 1rem 0.7rem;
     vertical-align: middle;
+    color: #fff;
 }
 .carrito-table tr:last-child td {
     border-bottom: none;
@@ -59,13 +61,13 @@
     padding: 0.5rem 1.1rem;
 }
 .carrito-total-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
+    background: linear-gradient(90deg, #0fffc1 0%, #7e30e1 100%);
+    color: #181c24;
     border-radius: 16px;
     padding: 1.2rem 2rem;
     font-size: 1.4rem;
     font-weight: 800;
-    box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+    box-shadow: 0 2px 8px rgba(0,255,193,0.10);
     margin: 2rem 0 1.5rem 0;
     text-align: right;
 }
@@ -81,33 +83,57 @@
     font-weight: 700;
     font-size: 1.1rem;
     padding: 0.7rem 1.5rem;
-    border: 2px solid #dc3545;
-    color: #dc3545;
-    background: #fff;
-    transition: background 0.2s, color 0.2s;
+    border: 2px solid #0fffc1;
+    color: #0fffc1;
+    background: transparent;
+    box-shadow: 0 2px 8px rgba(0,255,193,0.18);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .btn-vaciar:hover {
-    background: #dc3545;
-    color: #fff;
+    background: #0fffc1;
+    color: #181c24;
+    box-shadow: 0 4px 16px rgba(0,255,193,0.28);
 }
 .btn-finalizar {
     border-radius: 12px;
     font-weight: 700;
     font-size: 1.1rem;
     padding: 0.7rem 1.5rem;
-    background: #28a745;
-    color: #fff;
+    background: #0fffc1;
+    color: #181c24;
     border: none;
-    box-shadow: 0 2px 8px rgba(40,167,69,0.10);
-    transition: background 0.2s;
+    box-shadow: 0 2px 12px rgba(0,255,193,0.18);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .btn-finalizar:hover {
-    background: #218838;
+    background: #7e30e1;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(126,48,225,0.28);
+}
+.btn-vaciar,
+.btn-finalizar {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    filter: none !important;
+    color: #fff !important;
+}
+.btn-vaciar.disabled,
+.btn-finalizar.disabled {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    filter: none !important;
+    color: #fff !important;
+}
+.btn-vaciar i, .btn-finalizar i {
+    color: #fff !important;
 }
 @media (max-width: 900px) {
     .carrito-container { padding: 1.2rem 0.2rem; }
     .carrito-title { font-size: 1.5rem; }
     .carrito-total-card { font-size: 1.1rem; padding: 1rem; }
+}
+body, .bg-light {
+    background: #23272b !important;
 }
 </style>
 </head>

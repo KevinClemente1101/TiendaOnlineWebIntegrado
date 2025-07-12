@@ -74,12 +74,13 @@
 .perfil-card {
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(102,126,234,0.10);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     padding: 2.5rem 2rem 2rem 2rem;
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 .perfil-avatar {
     width: 90px;
@@ -96,41 +97,112 @@
 .perfil-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #222;
+    color: #333;
     text-align: center;
     margin-bottom: 1.5rem;
 }
 .perfil-form label {
     font-weight: 600;
-    color: #667eea;
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
 }
 .perfil-form .form-control {
     border-radius: 12px;
     border: 2px solid #e9ecef;
+    background: #fff;
+    color: #333;
     padding: 12px 15px;
     margin-bottom: 1rem;
     font-size: 1.05rem;
-    transition: border 0.2s;
+    transition: all 0.3s ease;
 }
 .perfil-form .form-control:focus {
     border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.10);
+    box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.15);
+    background: #fff;
+    color: #333;
 }
-.perfil-form .btn-primary, .perfil-form .btn-warning {
+.perfil-form .form-control::placeholder {
+    color: #888;
+}
+.perfil-form .btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
     border-radius: 12px;
     font-weight: 700;
-    padding: 10px 0;
+    padding: 12px 0;
     width: 100%;
     margin-bottom: 1rem;
+    color: #fff;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-.alert-success, .alert-danger {
+.perfil-form .btn-primary:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+}
+.perfil-form .btn-warning {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 12px 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #fff;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.perfil-form .btn-warning:hover {
+    background: linear-gradient(45deg, #f5576c, #f093fb);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(240,147,251,0.3);
+}
+.alert-success {
+    background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+    border: none;
     border-radius: 12px;
     font-size: 1.05rem;
     text-align: center;
+    color: #fff;
+    font-weight: 600;
+}
+.alert-danger {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+}
+.form-text {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+hr {
+    border-color: rgba(0,0,0,0.1);
+    margin: 2rem 0;
+}
+h4 {
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 @media (max-width: 768px) {
-    .perfil-card { padding: 1.2rem 0.5rem; }
-    .perfil-title { font-size: 1.2rem; }
+    .perfil-card { 
+        padding: 1.5rem 1rem; 
+        margin: 1rem;
+    }
+    .perfil-title { 
+        font-size: 1.5rem; 
+    }
 }
 </style>
 </body>

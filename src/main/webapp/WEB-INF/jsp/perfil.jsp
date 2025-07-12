@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="${sessionScope.rol eq 'admin' ? '/WEB-INF/jsp/admin/includes/header.jsp' : '/WEB-INF/jsp/includes/header.jsp'}" />
+  <jsp:include page="includes/header.jsp" />
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -60,19 +60,17 @@
         </div>
     </div>
 </div>
-<c:if test="${sessionScope.usuarioRol eq 'admin'}">
-    <jsp:include page="/WEB-INF/jsp/admin/includes/sidebar.jsp" />
-</c:if> 
 <style>
 .perfil-card {
-    background: #fff;
+    background: #181c24;
     border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(102,126,234,0.10);
+    box-shadow: 0 2px 16px rgba(0,255,193,0.10);
     padding: 2.5rem 2rem 2rem 2rem;
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    color: #fff;
 }
 .perfil-avatar {
     width: 90px;
@@ -89,37 +87,69 @@
 .perfil-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #222;
+    color: #0fffc1;
     text-align: center;
     margin-bottom: 1.5rem;
 }
 .perfil-form label {
     font-weight: 600;
-    color: #667eea;
+    color: #0fffc1;
 }
 .perfil-form .form-control {
     border-radius: 12px;
-    border: 2px solid #e9ecef;
+    border: 2px solid #0fffc1;
     padding: 12px 15px;
     margin-bottom: 1rem;
     font-size: 1.05rem;
-    transition: border 0.2s;
+    background: #23272b;
+    color: #fff;
+    transition: border 0.2s, background 0.2s, color 0.2s;
 }
 .perfil-form .form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.10);
+    border-color: #7e30e1;
+    box-shadow: 0 0 0 0.2rem rgba(126, 48, 225, 0.10);
+    background: #181c24;
+    color: #0fffc1;
 }
-.perfil-form .btn-primary, .perfil-form .btn-warning {
+.perfil-form .btn-primary {
     border-radius: 12px;
     font-weight: 700;
     padding: 10px 0;
     width: 100%;
     margin-bottom: 1rem;
+    background: #0fffc1;
+    color: #181c24;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,255,193,0.10);
+    transition: background 0.2s, color 0.2s;
+}
+.perfil-form .btn-primary:hover {
+    background: #7e30e1;
+    color: #fff;
+}
+.perfil-form .btn-warning {
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 10px 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    background: #7e30e1;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(126,48,225,0.10);
+    transition: background 0.2s, color 0.2s;
+}
+.perfil-form .btn-warning:hover {
+    background: #0fffc1;
+    color: #181c24;
 }
 .alert-success, .alert-danger {
     border-radius: 12px;
     font-size: 1.05rem;
     text-align: center;
+}
+body, .bg-light {
+    background: #23272b !important;
 }
 @media (max-width: 768px) {
     .perfil-card { padding: 1.2rem 0.5rem; }

@@ -127,8 +127,9 @@
 }
 .admin-sidebar .sidebar-heading {
     font-size: 1.08rem;
-    font-weight: 800;
-    color: #bfc6d1;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 2px 10px #000, 0 1px 0 #fff;
     margin-top: 2.2rem;
     margin-bottom: 0.9rem;
     letter-spacing: 0.7px;

@@ -27,13 +27,22 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-right: 0.7rem;
-    transition: color 0.2s, background 0.2s;
+    transition: color 0.2s, transform 0.2s;
     border-radius: 8px;
     padding: 0.5rem 1rem;
+    background: none !important;
 }
 .navbar .navbar-nav .nav-link.active, .navbar .navbar-nav .nav-link:hover {
-    color: #23272b !important;
-    background: #0fffc1;
+    color: #7e30e1 !important;
+    background: none !important;
+    transform: translateY(-3px) scale(1.07);
+}
+.navbar .navbar-nav .nav-link i {
+    transition: color 0.2s, transform 0.2s;
+}
+.navbar .navbar-nav .nav-link:hover i, .navbar .navbar-nav .nav-link.active i {
+    color: #7e30e1 !important;
+    transform: translateY(-2px) scale(1.15);
 }
 .navbar .dropdown-menu {
     border-radius: 12px;
@@ -45,14 +54,16 @@
 .navbar .dropdown-item {
     color: #0fffc1;
     font-weight: 600;
-    transition: background 0.2s, color 0.2s;
+    transition: color 0.2s, transform 0.2s;
 }
 .navbar .dropdown-item:hover, .navbar .dropdown-item:focus {
-    background: #0fffc1;
-    color: #181c24;
+    background: none !important;
+    color: #7e30e1;
+    transform: translateX(6px) scale(1.07);
 }
 .navbar .fa, .navbar .fas, .navbar .far, .navbar .fab {
     color: #0fffc1 !important;
+    transition: color 0.2s, transform 0.2s;
 }
 </style>
 </head>
