@@ -1,4 +1,4 @@
-# 🛹 Tienda de Patinetas - Perú
+# 🛹 House Of Skater - Perú
 
 Sistema web de gestión comercial para una tienda de patinetas desarrollado con JSP, Servlets y MySQL.
 
