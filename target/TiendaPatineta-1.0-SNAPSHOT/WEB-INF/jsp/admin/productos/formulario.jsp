@@ -100,8 +100,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="form-container">
-                        <form action="${pageContext.request.contextPath}/admin/productos${producto != null ? '/actualizar/'.concat(producto.id) : ''}" 
-                              method="post" enctype="multipart/form-data">
+                        <form action="${pageContext.request.contextPath}/admin/productos${producto != null ? '/actualizar/'.concat(producto.id) : ''}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="mb-3">

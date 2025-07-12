@@ -32,7 +32,8 @@
         }
         .product-image {
             height: 200px;
-            object-fit: cover;
+            object-fit: contain;
+            background: #fff;
             border-radius: 10px 10px 0 0;
         }
         .stock-badge {
@@ -132,7 +133,9 @@
                                     
                                     <div class="mt-auto">
                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <span class="precio-card mb-0">S/ <span class="precio-num"><fmt:formatNumber value="${producto.precio}" pattern=",##0.00"/></span></span>
+                                            <span class="precio-card mb-0">
+                                                S/ <span class="precio-num"><fmt:formatNumber value="${producto.precio}" pattern=",##0.00"/></span>
+                                            </span>
                                             <small class="text-muted">
                                                 Stock: ${producto.stock}
                                             </small>
@@ -150,7 +153,7 @@
                                                 <i class="fas fa-edit me-1"></i>Editar
                                             </a>
                                             <button type="button" class="btn btn-outline-danger btn-action" 
-                                                    onclick="confirmarEliminar(${producto.id}, '${producto.nombre}')">
+                                                    onclick="confirmarEliminar('${producto.id}', '${producto.nombre}')">
                                                 <i class="fas fa-trash me-1"></i>Eliminar
                                             </button>
                                         </div>

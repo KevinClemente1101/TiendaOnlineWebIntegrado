@@ -70,7 +70,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:50px; margin-right:16px; vertical-align:middle;"> House of skate
+            <img src="${pageContext.request.contextPath}/uploads/logo_1.png" alt="Logo" style="height:50px; margin-right:16px; vertical-align:middle;"> House of skate
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCliente">
             <span class="navbar-toggler-icon"></span>

@@ -108,7 +108,7 @@
                     <div class="login-card">
                         <div class="login-header">
                      <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:80px; margin-right:16px; vertical-align:middle;"> 
+            <img src="${pageContext.request.contextPath}/uploads/logo_1.png" alt="Logo" style="height:80px; margin-right:16px; vertical-align:middle;"> 
         </a>
                             <h2 class="mb-0">House Of Skate</h2>
                             <p style="color:#0fffc1; font-weight:700; font-size:1.1rem;">Inicia sesión para continuar</p>

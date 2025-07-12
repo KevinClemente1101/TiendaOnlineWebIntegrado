@@ -173,6 +173,14 @@
         .footer .fa {
             color: #0fffc1;
         }
+        .footer-modern {
+            background: #181c24;
+            color: #fff;
+            padding: 2.5rem 0 1rem 0;
+            border-radius: 40px 40px 0 0;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 24px rgba(31, 38, 135, 0.10);
+        }
         @media (max-width: 768px) {
             .hero-section {
                 padding: 2.5rem 0 1.5rem 0;
@@ -191,9 +199,9 @@
 <body>
     <jsp:include page="WEB-INF/jsp/includes/header.jsp" />
     <div class="w-100 text-center" style="background: #222;">
-        <img src="${pageContext.request.contextPath}/uploads/banner.webp"
-         alt="Banner"
-         style="width:100%; max-width:100vw; height:600px; object-fit:cover; object-position:center;">
+        <img src="${pageContext.request.contextPath}/uploads/banner2.webp"
+             alt="Banner"
+             style="display:block; width:100vw; height:600px; object-fit:cover; object-position:center; margin:0; padding:0;">
         </div>
 
     <!-- Hero Section -->
@@ -340,32 +348,26 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-4" id="contacto">
+    <footer class="footer-modern" id="contacto">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-            <img src="${pageContext.request.contextPath}/uploads/logo.png" alt="Logo" style="height:70px; margin-right:16px; vertical-align:middle;"> House of skate
-        </a>
-                  
-                    <p class="mb-0">Las mejores patinetas y accesorios para todos los niveles.</p>
+            <div class="row align-items-center gy-4">
+                <div class="col-md-6 d-flex align-items-center gap-3">
+                    <img src="${pageContext.request.contextPath}/uploads/logo_1.png" alt="Logo" style="height:70px; border-radius:16px; box-shadow:0 2px 12px #0fffc1;">
+                    <div>
+                        <h5 class="mb-1 fw-bold" style="color:#0fffc1; letter-spacing:1px;">House of skate</h5>
+                        <p class="mb-0" style="color:#fff; font-weight:500;">Las mejores patinetas y accesorios para todos los niveles.</p>
+                    </div>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <h6>Contacto</h6>
-                    <p class="mb-1">
-                        <i class="fas fa-phone me-2"></i>+51 908 503 404
-                    </p>
-                    <p class="mb-1">
-                        <i class="fas fa-envelope me-2"></i>HauseofSkate@gmail.com
-                    </p>
-                    <p class="mb-0">
-                        <i class="fas fa-map-marker-alt me-2"></i>Lima, Perú
-                    </p>
+                    <h6 class="fw-bold mb-3" style="color:#0fffc1; letter-spacing:1px;">Contacto</h6>
+                    <p class="mb-1 fs-5"><i class="fas fa-phone me-2" style="color:#7e30e1;"></i><span style="color:#fff; font-weight:600;">+51 908 503 404</span></p>
+                    <p class="mb-1 fs-5"><i class="fas fa-envelope me-2" style="color:#7e30e1;"></i><span style="color:#fff; font-weight:600;">HauseofSkate@gmail.com</span></p>
+                    <p class="mb-0 fs-5"><i class="fas fa-map-marker-alt me-2" style="color:#7e30e1;"></i><span style="color:#fff; font-weight:600;">Lima, Perú</span></p>
                 </div>
             </div>
-            <hr class="my-3">
+            <hr class="my-3" style="border-color:rgba(0,255,193,0.18);">
             <div class="text-center">
-                <small>&copy; 2024 House of Skate. Todos los derechos reservados.</small>
+                <small style="color:#0fffc1; font-weight:600;">&copy; 2024 House of Skate. Todos los derechos reservados.</small>
             </div>
         </div>
     </footer>
