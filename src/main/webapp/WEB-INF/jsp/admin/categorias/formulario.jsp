@@ -8,6 +8,7 @@
     <title>${categoria != null ? 'Editar' : 'Nueva'} Categoría - Tienda de Patinetas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <style>
         .form-wrapper-center {
             min-height: 60vh;
@@ -110,6 +111,18 @@
                                 </label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="${categoria != null ? categoria.nombre : ''}" required />
                             </div>
+                            <div class="mb-3">
+                                <label for="proveedores" class="form-label">Proveedores *</label>
+                                <select id="proveedores" name="proveedores" multiple class="selectpicker" data-live-search="true" data-actions-box="true" data-selected-text-format="count > 3">
+                                    <c:forEach items="${proveedores}" var="proveedor">
+                                        <option value="${proveedor.id}"
+                                            <c:forEach var="provSel" items="${categoria.proveedores}">
+                                                <c:if test="${provSel.id == proveedor.id}">selected</c:if>
+                                            </c:forEach>
+                                        >${proveedor.nombre}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>  
                             <div class="d-flex gap-2 justify-content-end">
                                 <a href="${pageContext.request.contextPath}/admin/categorias" class="btn btn-secondary">
                                     <i class="fas fa-times me-2"></i>Cancelar
@@ -125,6 +138,19 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#proveedores').selectpicker({
+                noneSelectedText: 'Selecciona proveedores...',
+                noneResultsText: 'No se encontraron proveedores',
+                selectAllText: 'Seleccionar todos',
+                deselectAllText: 'Deseleccionar todos',
+                liveSearchPlaceholder: 'Buscar proveedores...'
+            });
+        });
+    </script>
 </body>
 </html> 

@@ -1,11 +1,14 @@
 package com.tiendapatineta.model;
 
+import java.util.List;
+
 public class Proveedor {
     private int id;
     private String nombre;
     private String ruc;
     private String telefono;
     private String productos;
+    private List<Categoria> categorias;
 
     public Proveedor() {}
 
@@ -31,4 +34,7 @@ public class Proveedor {
 
     public String getProductos() { return productos; }
     public void setProductos(String productos) { this.productos = productos; }
+
+    public List<Categoria> getCategorias() { return categorias; }
+    public void setCategorias(List<Categoria> categorias) { this.categorias = categorias; }
 } 

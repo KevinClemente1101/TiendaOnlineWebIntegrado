@@ -35,10 +35,7 @@
                             <label for="telefono" class="form-label">Teléfono *</label>
                             <input type="text" class="form-control" id="telefono" name="telefono" value="${proveedor != null ? proveedor.telefono : ''}" required maxlength="15">
                         </div>
-                        <div class="mb-3">
-                            <label for="productos" class="form-label">Productos *</label>
-                            <input type="text" class="form-control" id="productos" name="productos" value="${proveedor != null ? proveedor.productos : ''}" required maxlength="255">
-                        </div>
+                       
                         <div class="d-flex gap-2 justify-content-end">
                             <a href="${pageContext.request.contextPath}/admin/proveedores" class="btn btn-secondary">
                                 <i class="fas fa-times me-2"></i>Cancelar

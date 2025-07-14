@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-07-2025 a las 00:52:24
+-- Tiempo de generación: 12-07-2025 a las 18:25:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -228,7 +228,16 @@ INSERT INTO `detalle_ventas` (`id`, `venta_id`, `producto_id`, `cantidad`, `subt
 (1, 1, 3, 1, 199.99),
 (2, 2, 2, 2, 179.98),
 (3, 2, 8, 1, 189.99),
-(4, 3, 2, 1, 89.99);
+(4, 3, 2, 1, 89.99),
+(5, 4, 3, 1, 199.99),
+(6, 5, 4, 1, 159.99),
+(7, 6, 2, 1, 89.99),
+(8, 7, 7, 1, 179.99),
+(9, 8, 7, 1, 179.99),
+(10, 9, 4, 1, 159.99),
+(12, 11, 2, 1, 89.99),
+(13, 11, 7, 1, 179.99),
+(14, 11, 8, 1, 189.99);
 
 -- --------------------------------------------------------
 
@@ -252,14 +261,36 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria_id`, `fecha_creacion`) VALUES
-(1, 'Patineta Pro Element', 'Patineta profesional con trucks de alta calidad y ruedas de 52mm', 299.99, 15, 'patineta-pro-element.jpg', 1, '2025-07-10 16:49:53'),
-(2, 'Patineta Beginner Penny', 'Patineta perfecta para principiantes, fácil de manejar', 89.99, 22, 'patineta-beginner-penny.jpg', 2, '2025-07-10 16:49:53'),
-(3, 'Longboard Sector 9', 'Longboard de 42 pulgadas ideal para cruising y downhill', 199.99, 9, 'longboard-sector9.jpg', 3, '2025-07-10 16:49:53'),
-(4, 'Cruiser Santa Cruz', 'Patineta cruiser clásica con diseño retro', 159.99, 20, 'cruiser-santacruz.jpg', 4, '2025-07-10 16:49:53'),
-(5, 'Ruedas Bones', 'Ruedas de 54mm con dureza 99A para máximo rendimiento', 29.99, 50, 'ruedas-bones.jpg', 5, '2025-07-10 16:49:53'),
-(6, 'Trucks Independent', 'Trucks de aluminio forjado para mayor durabilidad', 45.99, 30, 'trucks-independent.jpg', 5, '2025-07-10 16:49:53'),
-(7, 'Patineta Plan B', 'Patineta de madera de arce canadiense con gráficos únicos', 179.99, 12, 'patineta-planb.jpg', 1, '2025-07-10 16:49:53'),
-(8, 'Patineta Girl', 'Patineta con concavidad perfecta para trucos', 189.99, 17, 'patineta-girl.jpg', 1, '2025-07-10 16:49:53');
+(1, 'Patineta Pro Element', 'Patineta profesional con trucks de alta calidad y ruedas de 52mm', 299.99, 15, '1752282233714.webp', 1, '2025-07-10 16:49:53'),
+(2, 'Patineta Beginner Penny', 'Patineta perfecta para principiantes, fácil de manejar', 89.99, 20, '1752282030982.webp', 2, '2025-07-10 16:49:53'),
+(3, 'Longboard Sector 9', 'Longboard de 42 pulgadas ideal para cruising y downhill', 199.99, 7, '1752281965943.jpg', 3, '2025-07-10 16:49:53'),
+(4, 'Cruiser Santa Cruz', 'Patineta cruiser clásica con diseño retro', 159.99, 18, '1752281598587.webp', 4, '2025-07-10 16:49:53'),
+(5, 'Ruedas Bones', 'Ruedas de 54mm con dureza 99A para máximo rendimiento', 29.99, 50, '1752282280907.webp', 5, '2025-07-10 16:49:53'),
+(6, 'Trucks Independent', 'Trucks de aluminio forjado para mayor durabilidad', 45.99, 30, '1752282338873.jpg', 5, '2025-07-10 16:49:53'),
+(7, 'Patineta Plan B', 'Patineta de madera de arce canadiense con gráficos únicos', 179.99, 9, '1752282164836.jpeg', 1, '2025-07-10 16:49:53'),
+(8, 'Patineta Girl', 'Patineta con concavidad perfecta para trucos', 189.99, 16, '1752282101840.webp', 1, '2025-07-10 16:49:53'),
+(10, 'Tablas de skate Fun Skateboards', 'de Guatambú 7 capas, calidad Premium, profesional, con concave, tail y nose, liviana y resistente.', 154.80, 12, '1752282752160.jpeg', 5, '2025-07-12 01:12:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `ruc` varchar(11) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
+  `productos` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id`, `nombre`, `ruc`, `telefono`, `productos`) VALUES
+(1, 'peru patinas sac ', '78545545445', '937546225', 'patinetas penny');
 
 -- --------------------------------------------------------
 
@@ -271,6 +302,9 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `distrito` varchar(50) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `rol` enum('admin','cliente') DEFAULT 'cliente',
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
@@ -280,11 +314,12 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `fecha_registro`) VALUES
-(1, 'Administrador', 'admin@tiendapatineta.com', 'admin123', 'admin', '2025-07-10 16:49:52'),
-(2, 'Cliente Test', 'cliente@test.com', 'cliente123', 'cliente', '2025-07-10 16:49:52'),
-(3, 'Juan Pérez', 'juan@email.com', 'juan123', 'admin', '2025-07-10 16:49:52'),
-(6, 'Kevin ', 'Clemente11@gmail.com', '12345', 'admin', '2025-07-10 18:05:56');
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `distrito`, `direccion`, `password`, `rol`, `fecha_registro`) VALUES
+(1, 'Administrador', 'admin@tiendapatineta.com', '', '', '', '$2a$12$WwOeRpygqXfHbIxhCDpQ8.Zijb5pxZfJD3H7v7scHKSoJQTeP5xva', 'admin', '2025-07-10 16:49:52'),
+(2, 'Cliente Test', 'cliente@test.com', '', '', '', 'cliente123', 'cliente', '2025-07-10 16:49:52'),
+(6, 'Kevin ', 'Clemente11@gmail.com', '', '', '', '12345', 'admin', '2025-07-10 18:05:56'),
+(8, 'angel', 'angel2@gmail.com', '905388644', 'ancon', 'ancon', '$2a$10$Mu2pHr13YaGR6u8LdFc1G.eS0ItIQbZKy50d4MxmIqMfphWrA34.2', 'cliente', '2025-07-11 15:43:26'),
+(9, 'erik', 'erikmilla456@gmail.com', '908503404', 'ancon', 'las gardenias', '$2a$10$l.ipOWTBCkpxlio2Ozw22.IOiaNIxRyJMEt66fgEBE.fMHWcyxMSm', 'cliente', '2025-07-11 16:17:37');
 
 -- --------------------------------------------------------
 
@@ -296,17 +331,43 @@ CREATE TABLE `ventas` (
   `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `total` decimal(10,2) NOT NULL
+  `total` decimal(10,2) NOT NULL,
+  `direccion_envio` varchar(255) NOT NULL,
+  `metodo_pago` varchar(20) NOT NULL,
+  `referencia_pago` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `usuario_id`, `fecha`, `total`) VALUES
-(1, 2, '2025-07-10 19:09:12', 199.99),
-(2, 2, '2025-07-10 21:54:40', 369.97),
-(3, 2, '2025-07-10 21:55:51', 89.99);
+INSERT INTO `ventas` (`id`, `usuario_id`, `fecha`, `total`, `direccion_envio`, `metodo_pago`, `referencia_pago`) VALUES
+(1, 2, '2025-07-10 19:09:12', 199.99, '', '', NULL),
+(2, 2, '2025-07-10 21:54:40', 369.97, '', '', NULL),
+(3, 2, '2025-07-10 21:55:51', 89.99, '', '', NULL),
+(4, 2, '2025-07-11 14:16:18', 199.99, '', '', NULL),
+(5, 2, '2025-07-11 14:38:27', 169.99, 'ancon', 'tarjeta', '39123921738217332'),
+(6, 2, '2025-07-11 14:47:54', 99.99, 'ancon', 'yape', '989823727'),
+(7, 2, '2025-07-11 14:48:49', 189.99, 'ancon', 'tarjeta', '39123921738217332'),
+(8, 2, '2025-07-11 14:52:34', 189.99, 'ancon', 'tarjeta', '39123921738217332'),
+(9, 2, '2025-07-11 14:53:02', 169.99, 'ancon', 'yape', '989823727'),
+(11, 9, '2025-07-11 19:19:59', 469.97, 'ancon', 'tarjeta', '39123921738217332');
+
+-- Tabla boleta (cabecera de comprobante)
+CREATE TABLE boleta (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  numero VARCHAR(20) NOT NULL,
+  fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  usuario_id INT NOT NULL,
+  venta_id INT NOT NULL,
+  subtotal DECIMAL(10,2) NOT NULL,
+  igv DECIMAL(10,2) NOT NULL,
+  total DECIMAL(10,2) NOT NULL,
+  forma_pago VARCHAR(20),
+  observaciones VARCHAR(255),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+  FOREIGN KEY (venta_id) REFERENCES ventas(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Índices para tablas volcadas
@@ -333,6 +394,12 @@ ALTER TABLE `detalle_ventas`
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idx_productos_categoria` (`categoria_id`);
+
+--
+-- Indices de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -363,25 +430,31 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

@@ -1,10 +1,12 @@
 package com.tiendapatineta.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Categoria implements Serializable {
     private int id;
     private String nombre;
+    private List<Proveedor> proveedores;
     
     public Categoria() {}
     
@@ -29,6 +31,9 @@ public class Categoria implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public List<Proveedor> getProveedores() { return proveedores; }
+    public void setProveedores(List<Proveedor> proveedores) { this.proveedores = proveedores; }
     
     @Override
     public String toString() {

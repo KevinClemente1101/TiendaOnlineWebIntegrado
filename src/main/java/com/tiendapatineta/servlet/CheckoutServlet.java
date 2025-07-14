@@ -2,10 +2,12 @@ package com.tiendapatineta.servlet;
 
 import com.tiendapatineta.dao.VentaDAO;
 import com.tiendapatineta.dao.ProductoDAO;
+import com.tiendapatineta.dao.BoletaDAO;
 import com.tiendapatineta.model.ItemCarrito;
 import com.tiendapatineta.model.Usuario;
 import com.tiendapatineta.model.Venta;
 import com.tiendapatineta.model.DetalleVenta;
+import com.tiendapatineta.model.Boleta;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,16 +19,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.sql.Timestamp;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
     private VentaDAO ventaDAO;
     private ProductoDAO productoDAO;
+    private BoletaDAO boletaDAO;
 
     @Override
     public void init() throws ServletException {
         ventaDAO = new VentaDAO();
         productoDAO = new ProductoDAO();
+        boletaDAO = new BoletaDAO();
     }
 
     @Override
@@ -83,7 +88,23 @@ public class CheckoutServlet extends HttpServlet {
         }
         // Limpiar carrito
         session.removeAttribute("carrito");
-        // Redirigir a página principal
-        response.sendRedirect(request.getContextPath() + "/");
+        // Crear boleta y redirigir a descarga
+        Boleta boleta = new Boleta();
+        boleta.setNumero(boletaDAO.generarSiguienteNumeroBoleta());
+        boleta.setFecha(new Timestamp(System.currentTimeMillis()));
+        boleta.setUsuario(usuario);
+        venta.setId(ventaId);
+        boleta.setVenta(venta);
+        // Calcular subtotal e IGV (18%)
+        BigDecimal subtotal = total.divide(new BigDecimal("1.18"), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal igv = total.subtract(subtotal);
+        boleta.setSubtotal(subtotal);
+        boleta.setIgv(igv);
+        boleta.setTotal(total);
+        boleta.setFormaPago(metodoPago.trim());
+        boleta.setObservaciones("Gracias por su compra");
+        boletaDAO.insertar(boleta);
+        response.sendRedirect(request.getContextPath() + "/boleta/descargar?id=" + boleta.getId());
+        return;
     }
 } 

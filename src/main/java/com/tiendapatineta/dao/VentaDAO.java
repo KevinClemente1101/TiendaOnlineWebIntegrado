@@ -184,4 +184,33 @@ public class VentaDAO {
         }
         return resultados;
     }
+
+    public Venta obtenerPorId(int id) {
+        String sql = "SELECT v.id, v.usuario_id, v.fecha, v.total, v.direccion_envio, v.metodo_pago, v.referencia_pago, u.nombre as usuario_nombre, u.email as usuario_email FROM ventas v JOIN usuarios u ON v.usuario_id = u.id WHERE v.id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Venta venta = new Venta();
+                    venta.setId(rs.getInt("id"));
+                    venta.setUsuarioId(rs.getInt("usuario_id"));
+                    venta.setFecha(rs.getTimestamp("fecha"));
+                    venta.setTotal(rs.getBigDecimal("total"));
+                    venta.setDireccionEnvio(rs.getString("direccion_envio"));
+                    venta.setMetodoPago(rs.getString("metodo_pago"));
+                    venta.setReferenciaPago(rs.getString("referencia_pago"));
+                    Usuario usuario = new Usuario();
+                    usuario.setId(rs.getInt("usuario_id"));
+                    usuario.setNombre(rs.getString("usuario_nombre"));
+                    usuario.setEmail(rs.getString("usuario_email"));
+                    venta.setUsuario(usuario);
+                    return venta;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener venta por ID: " + e.getMessage());
+        }
+        return null;
+    }
 } 
